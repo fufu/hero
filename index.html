@@ -15,7 +15,7 @@ var ballX,ballY;
 var addX,addY;
 var intervalId;
 var state = 0;
-var TIMER_TOTAL = 6000;
+var TIMER_TOTAL = 30000;
 var TIMER_INTERVAL = 2000;
 var timer_remain = TIMER_TOTAL;
 
@@ -134,7 +134,10 @@ function startclick(){
     number=0;
     timer_remain = TIMER_TOTAL;
     state = 1;
-    
+    document.getElementById("myscore").style.fontSize="12px";
+    document.getElementById("myscore").innerHTML="";
+    document.getElementById("stage").style.visibility='visible';
+
     canvas = document.getElementById("mycanvas");
     context = canvas.getContext("2d");
     
@@ -166,8 +169,11 @@ function stopclick(){
 
 	document.getElementById("num").style.color="blue";
 	
-
- ///	document.getElementById("mycanvas").innerHTML="score:" + number;
+document.getElementById("stage").style.visibility='hidden';
+document.getElementById("myscore").style.fontSize="120px";
+//document.getElementById("myscore").style.fontWeight="120px";
+document.getElementById("myscore").style.color="#4d4d4d";
+document.getElementById("myscore").innerHTML="score:" + number;
 }
 
 
@@ -187,9 +193,11 @@ function stopclick(){
       <td><input type="button"  value="神猿太快，不玩了-_-!!" id="stop_btn" onclick="stopclick();" style="cursor:pointer;width: 300; height: 50; border-left: 3px solid #85411C; border-right: 3px solid #4E250C; border-top: 3px solid #85411C; border-bottom: 3px solid #4E250C; background-color: #8F431B; color:#FFCC66; font-weight:bold; font-size:14pt; font-family:微软雅黑"/></td> 
       </tr>
       </table>
-      <div style="width:600px;height:600px;border:#3c3c3c solid 1px;">
-          <canvas id="mycanvas" width="600px" height="600px"> broswer is not support the game!</canvas>
+      <p id="myscore"></p>
+      <div id="stage" width=600px height=600px style="border:#3c3c3c solid 1px;">
+          <canvas id="mycanvas" width=600px height=600px > broswer is not support the game!</canvas>
       </div>
+
  
  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
