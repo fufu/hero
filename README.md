@@ -1,10 +1,12 @@
-hero
+Play monkey game(html)
 ====
-Feature
-Random bicolor for each game.
-Share link by weichat and weibo.
+# Feature
+
+- Random bicolor for each game.
+- Share link by weichat and Weibo
 
 
 
-Todo
+# Todo
+
 Onclick doesn't work well on phone browser.
