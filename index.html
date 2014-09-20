@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>比速度，几秒秒抓神猿</title>
+<title>比速度，30秒内抓神猿</title>
 <meta name="description" content="monkey game for joke...">    
 <script type="text/javascript">
 //
@@ -15,7 +15,7 @@ var ballX,ballY;
 var addX,addY;
 var intervalId;
 var state = 0;
-var TIMER_TOTAL = 30000;
+var TIMER_TOTAL = 8000;
 var TIMER_INTERVAL = 2000;
 var timer_remain = TIMER_TOTAL;
 
@@ -36,21 +36,23 @@ function catch_ball(ev){
     var relativeY = y - document.getElementById("mycanvas").offsetTop;
     
     //judge  whether  clicked  the ball
-    if(-5<(relativeX - ballX)&&(relativeX - ballX)<=50){
-         if(-5<(relativeY - ballY)&&(relativeY - ballY)<=50){
+    if(-5<(relativeX - ballX)&&(relativeX - ballX)<=60){
+         if(-5<(relativeY - ballY)&&(relativeY - ballY)<=60){
          	if(state ==1){
             number++;
        		document.getElementById("num").style.color="blue";
-       		document.getElementById("num").style.fontSize="larger";
        		document.getElementById("num").innerHTML=number;
        		}
         }
     }
 }
 
+
 function windowLoad(){
+        
     document.getElementById("mycanvas").onclick = catch_ball;
    	document.getElementById("stop_btn").disabled = "";
+  
 }
 
 function jump(){
@@ -103,8 +105,8 @@ function jump_2(){
    context.clearRect(0,0,width,height);
    context.save();
    //draw  ball table .
-   context.fillStyle = "#f06060";
-
+   //context.fillStyle = "#f06060";
+	context.fillStyle =arr1[id];
    context.lineWidth = 1;
    context.fillRect(1,1,width -2,height-2);
    context.strokeRect(1,1,width-2,height-2);
@@ -129,18 +131,49 @@ function jump_2(){
 	}
 }
 
+var arrColor = [
+"#ffdab9",
+"#ff4500",
+"#ffd700",
+"#7b68ee",
+"#f5deb3",
+"#ff1493"
+];
+
+var id = 0;
+
+function change(){
+id = parseInt(Math.random()*(6));
+//console.warn(id);
+document.bgColor=arrColor[id];
+
+
+}
+
 function startclick(){
     //alert('game  start ');
+    
+    
     number=0;
     timer_remain = TIMER_TOTAL;
     state = 1;
     document.getElementById("myscore").style.fontSize="12px";
     document.getElementById("myscore").innerHTML="";
     document.getElementById("stage").style.visibility='visible';
-
-    canvas = document.getElementById("mycanvas");
+	canvas = document.getElementById("mycanvas");
     context = canvas.getContext("2d");
-    
+  
+  	change();
+  
+  	var w=window.innerWidth;
+	var h=window.innerHeight;
+	if (w>h)w = h;
+	
+	canvas = document.getElementById("mycanvas");
+
+    canvas.width=w*0.95;
+    canvas.height=w*0.95;
+      
     width = canvas.width;
     height = canvas.height;
     //alert(height);
@@ -168,12 +201,25 @@ function stopclick(){
 	document.getElementById("stop_btn").disabled = "disabled";
 
 	document.getElementById("num").style.color="blue";
+
+	document.getElementById("stage").style.visibility='hidden';
+	canvas.width=10;
+	canvas.height=10;
 	
-document.getElementById("stage").style.visibility='hidden';
-document.getElementById("myscore").style.fontSize="120px";
-//document.getElementById("myscore").style.fontWeight="120px";
-document.getElementById("myscore").style.color="#4d4d4d";
-document.getElementById("myscore").innerHTML="score:" + number;
+	document.getElementById("myscore").style.fontSize="45px";
+	document.getElementById("myscore").style.color="#4d4d4d";
+	document.getElementById("myscore").innerHTML="本次成绩:" + number;
+
+	// Check browser support
+	if (typeof(Storage) != "undefined") {
+		if(localStorage.getItem("highscore") < number)
+		{
+			// Store
+			localStorage.setItem("highscore", number);
+		}
+		// Retrieve
+		document.getElementById("myscore").innerHTML += "<br>最好成绩:" + localStorage.getItem("highscore");
+	} 
 }
 
 
@@ -181,21 +227,21 @@ document.getElementById("myscore").innerHTML="score:" + number;
 </script>
 </head>
   <body onload="windowLoad();"  bgcolor="#f06060">
-      <h1 style="color: blue; margin-left: 20px">抓神猿，比比30秒能抓几个？</h1>
-      <a style="margin-left: 20px" >剩余时间:</a>
+      <h2 style="color: blue; margin-left: 10px">只想不做，不如抓神猿！<br>30秒能抓几个？</h1>
+      <a style="margin-left: 10px" >剩余时间:</a>
       <a id="time">00:30</a>
       <a>，您抓住了</a>
       <a id="num">0</a>
       <a>只猴子！</a>
-      <table cellpadding="10">
+      <table cellpadding="1">
       <tr>
-      <td><input type="button"  value="开始抓猴" id="start_btn" onclick="startclick();" style="cursor:pointer;width: 300; height: 50; border-left: 3px solid #85411C; border-right: 3px solid #4E250C; border-top: 3px solid #85411C; border-bottom: 3px solid #4E250C; background-color: #8F431B; color:#FFCC66; font-weight:bold; font-size:14pt; font-family:微软雅黑"/></td>
-      <td><input type="button"  value="神猿太快，不玩了-_-!!" id="stop_btn" onclick="stopclick();" style="cursor:pointer;width: 300; height: 50; border-left: 3px solid #85411C; border-right: 3px solid #4E250C; border-top: 3px solid #85411C; border-bottom: 3px solid #4E250C; background-color: #8F431B; color:#FFCC66; font-weight:bold; font-size:14pt; font-family:微软雅黑"/></td> 
+      <td><input type="button" value="开始抓猴" id="start_btn" onclick="startclick();" style="cursor:pointer;width: 100; height: 30; border-left: 1px solid #85411C; border-right: 1px solid #4E250C; border-top: 1px solid #85411C; border-bottom: 1px solid #4E250C; background-color: #8F431B; color:#FFCC66; font-weight:bold; font-size:14pt;"/></td>
+      <td><input type="button" value="神猿太快，不玩了-_-!!" id="stop_btn" onclick="stopclick();" style="cursor:pointer;width: 100; height: 30; border-left: 1px solid #85411C; border-right: 1px solid #4E250C; border-top: 1px solid #85411C; border-bottom: 1px solid #4E250C; background-color: #8F431B; color:#FFCC66; font-weight:bold; font-size:14pt;"/></td> 
       </tr>
       </table>
       <p id="myscore"></p>
-      <div id="stage" width=600px height=600px style="border:#3c3c3c solid 1px;">
-          <canvas id="mycanvas" width=600px height=600px > broswer is not support the game!</canvas>
+      <div id="stage">
+          <canvas id="mycanvas"> broswer is not support the game!</canvas>
       </div>
 
  
