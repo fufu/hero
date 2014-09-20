@@ -12,8 +12,6 @@
 <meta property="og:title" content="无聊的时候想不想打猴子玩？ via oslook.com" />
 <meta property="og:description" content="你可以把猴子想象成任何你讨厌或喜欢的人，看看30秒你能点做多少，哈哈，我30秒180下..." />
 <meta property="og:image" content="http://picm.bbzhi.com/dongwubizhi/yuanhouxingxing/yuanhouxingxing_76869_m.jpg" />
-<meta name="weibo: article:create_at" content="2013-09-02 09:35:58 +0800" />
-<meta name="weibo: article:update_at" content="2013-09-02 11:33:16 +0800" />
 <script type="text/javascript">
 //
 /// Download by http://www.oslook.com
@@ -22,7 +20,7 @@ var ballX,ballY;
 var addX,addY;
 var intervalId;
 var state = 0;
-var TIMER_TOTAL = 8000;
+var TIMER_TOTAL = 30000;
 var TIMER_INTERVAL = 2000;
 var timer_remain = TIMER_TOTAL;
 
@@ -32,6 +30,16 @@ var canvas ;
 var width;
 var height = 600;
 
+var arrColor = [
+"#ffdab9",
+"#ff4500",
+"#ffd700",
+"#7b68ee",
+"#f5deb3",
+"#ff1493"
+];
+
+var id = 0;
 
 function catch_ball(ev){
     //alert('catch');
@@ -113,7 +121,7 @@ function jump_2(){
    context.save();
    //draw  ball table .
    //context.fillStyle = "#f06060";
-	context.fillStyle =arr1[id];
+   context.fillStyle =arrColor[id];
    context.lineWidth = 1;
    context.fillRect(1,1,width -2,height-2);
    context.strokeRect(1,1,width-2,height-2);
@@ -138,28 +146,17 @@ function jump_2(){
 	}
 }
 
-var arrColor = [
-"#ffdab9",
-"#ff4500",
-"#ffd700",
-"#7b68ee",
-"#f5deb3",
-"#ff1493"
-];
 
-var id = 0;
 
 function change(){
 id = parseInt(Math.random()*(6));
 //console.warn(id);
 document.bgColor=arrColor[id];
-
-
 }
 
 function startclick(){
     //alert('game  start ');
-    
+   	change();
     
     number=0;
     timer_remain = TIMER_TOTAL;
@@ -169,8 +166,6 @@ function startclick(){
     document.getElementById("stage").style.visibility='visible';
 	canvas = document.getElementById("mycanvas");
     context = canvas.getContext("2d");
-  
-  	change();
   
   	var w=window.innerWidth;
 	var h=window.innerHeight;
@@ -230,10 +225,9 @@ function stopclick(){
 }
 
 
-
 </script>
 </head>
-  <body onload="windowLoad();"  bgcolor="#f06060">
+  <body onload="windowLoad();" bgcolor="#f06060">
       <h2 style="color: blue; margin-left: 10px">只想不做，不如抓神猿！<br>30秒能抓几个？</h1>
       <a style="margin-left: 10px" >剩余时间:</a>
       <a id="time">00:30</a>
