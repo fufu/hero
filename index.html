@@ -15,7 +15,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://i.oslook.com/hero" />
 <meta property="og:title" content="无聊的时候想不想打猴子玩？ via oslook.com" />
-<meta property="og:description" content="你可以把猴子想象成任何你讨厌或喜欢的人，看看30秒你能点做多少，哈哈，我30秒180下..." />
+<meta property="og:description" content="猴子就是你讨厌或喜欢的人，我30秒180下，哈哈，就看你啦..." />
 <meta property="og:image" content="http://i.oslook.com/hero/monkey.jpg" />
 <script type="text/javascript" src="main.js"></script>
 <link type="text/css" rel="stylesheet" href="stylesheet.css" />
@@ -47,63 +47,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 ga('create', 'UA-391361-3', 'auto');
 ga('send', 'pageview');
-</script>
-<script>
-////weixin sharing
-        var imgUrl = "http://i.oslook.com/hero/monkey.jpg";
-        var lineLink = "http://i.oslook.com/hero";
-        var descContent = '你可以把猴子想象成任何你讨厌或喜欢的人，看看30秒你能点做多少，哈哈，我30秒180下...';
-        var shareTitle = '无聊的时候想不想打猴子玩？ via oslook.com';
-        var appid = '';
-         
-        function shareFriend() {
-            WeixinJSBridge.invoke('sendAppMessage',{
-                "appid": appid,
-                "img_url": imgUrl,
-                "img_width": "200",
-                "img_height": "200",
-                "link": lineLink,
-                "desc": descContent,
-                "title": shareTitle
-            }, function(res) {
-                //_report('send_msg', res.err_msg);
-            })
-        }
-        function shareTimeline() {
-            WeixinJSBridge.invoke('shareTimeline',{
-                "img_url": imgUrl,
-                "img_width": "200",
-                "img_height": "200",
-                "link": lineLink,
-                "desc": descContent,
-                "title": shareTitle
-            }, function(res) {
-                   //_report('timeline', res.err_msg);
-            });
-        }
-        function shareWeibo() {
-            WeixinJSBridge.invoke('shareWeibo',{
-                "content": descContent,
-                "url": lineLink,
-            }, function(res) {
-                //_report('weibo', res.err_msg);
-            });
-        }
-        // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
-        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-            // 发送给好友
-            WeixinJSBridge.on('menu:share:appmessage', function(argv){
-                shareFriend();
-            });
-            // 分享到朋友圈
-            WeixinJSBridge.on('menu:share:timeline', function(argv){
-                shareTimeline();
-            });
-            // 分享到微博
-            WeixinJSBridge.on('menu:share:weibo', function(argv){
-                shareWeibo();
-            });
-        }, false);
 </script>
 </body>
 </html>
