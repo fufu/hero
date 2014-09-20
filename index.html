@@ -4,7 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no,target-densitydpi=device-dpi">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="full-screen" content="true">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true">
+<meta name="360-fullscreen" content="true">
+	
 <title>比速度，30秒内抓神猿</title>
 <meta name="description" content="比分数..."> 
 <meta property="og:type" content="article" />
@@ -16,125 +23,44 @@
 //
 /// Download by http://www.oslook.com
 //
-var ballX,ballY;
-var addX,addY;
+var monkeyX,monkeyY;
+
 var intervalId;
-var state = 0;
+var game_state = 0;
 var TIMER_TOTAL = 30000;
-var TIMER_INTERVAL = 2000;
+var TIMER_INTERVAL = 1000;
 var timer_remain = TIMER_TOTAL;
 
-var number =0;
+var score =0;
 var context ;
-var canvas ;
-var width;
-var height = 600;
+var stagesize = width;
+var stageleft=0;
+var stagetop=0;
 
-var arrColor = [
-"#ffdab9",
-"#ff4500",
-"#ffd700",
-"#7b68ee",
-"#f5deb3",
-"#ff1493"
-];
-
-var id = 0;
-
-function catch_ball(ev){
+function catch_monkey(ev){
     var x = ev.pageX;
     var y = ev.pageY;
-    // get position relative to canvas .
-    
-    var relativeX = x - document.getElementById("mycanvas").offsetLeft;
-    var relativeY = y - document.getElementById("mycanvas").offsetTop;
-    
-    //judge  whether  clicked  the ball
-    if(0<(relativeX - ballX)&&(relativeX - ballX)<=60){
-         if(0<(relativeY - ballY)&&(relativeY - ballY)<=60){
-         //console.warn(relativeX)
-         	if(state ==1){
-            number++;
-       	//	document.getElementById("num").style.color="blue";
-       		document.getElementById("num").innerHTML=number;
-       		}
-        }
-    }
+
+ 	if(game_state ==1){
+	    score++;
+		document.getElementById("score").innerHTML=score;
+	}
+
 }
 
-
-function windowLoad(){
-        
-    document.getElementById("mycanvas").onclick = catch_ball;
-   	document.getElementById("stop_btn").disabled = "";
-   	document.getElementById("num").style.color="blue";
-}
-
-function jump(){
-   context.clearRect(0,0,width,height);
-   context.save();
-   //draw  ball table .
-   context.fillStyle = "#485958";
-   context.strokeStyle = "#3c3c3c";
-   context.lineWidth = 3;
-   context.fillRect(3,3,width -6,height-6);
-   context.strokeRect(3,3,width-6,height-6);
-   
-   //draw ball .
-   context.beginPath();
-   context.fillStyle = "blue";
-   context.arc(ballX,ballY,5,0,2*Math.PI,false);
-
-   ballX += addX;
-   ballY += addY;
-   //alert(ballX+":"+ballY);
-   //modify position .
-   if(ballX<5){
-       ballX = 5;
-       addX = -addX;
-   }
-   
-   if(ballY <5){
-       ballY = 5;
-       addY = -addY;
-   }
-   
-   if(ballX>width-6){
-       ballX = width-6;
-       addX = -addX;
-   }
-   
-   if(ballY>height-6){
-       ballY = height-6;
-       addY = -addY;
-   }
-   
-   context.closePath();
-   context.fill();
-   context.restore(); 
-   
-}
 
 //random move
-function jump_2(){
-   context.clearRect(0,0,width,height);
-   context.save();
-   //draw  ball table .
-   //context.fillStyle = "#f06060";
-   context.fillStyle =arrColor[id];
-   context.lineWidth = 1;
-   context.fillRect(1,1,width -2,height-2);
-   context.strokeRect(1,1,width-2,height-2);
+function jump(){
    
 	//draw monkey .
-    ballX = parseInt(Math.random()*(width-50));
-    ballY = parseInt(Math.random()*(height-50));
-	var img=new Image();
-	img.src="http://i.oslook.com/hero/monkey.jpg";
-	img.onload=function(){
-		context.drawImage(img,ballX,ballY);
-	};
+    monkeyX = parseInt(Math.random()*(stagesize-50));
+    monkeyY = parseInt(Math.random()*(stagesize-50));
+	//move
+	document.getElementById("myMonkey").style.position="absolute";
+	document.getElementById("myMonkey").style.left=stageleft + monkeyX + 'px';
+	document.getElementById("myMonkey").style.top=stagetop + monkeyY + 'px';
 
+	//time update
 	timer_remain -= TIMER_INTERVAL;
 	document.getElementById("time").style.color="blue";
 	document.getElementById("time").innerHTML="00:" + timer_remain/1000;
@@ -142,99 +68,129 @@ function jump_2(){
 	
 	if(timer_remain <= 0)
 	{
-	///	alert('时间到！恭喜你竟然抓到了n只神猿！');
 		stopclick();
 	}
 }
 
 
+///backgrand
+function bgRandom(){
+	var arrColor = [
+	"#ffdab9",
+	"#ff4500",
+	"#ffd700",
+	"#7b68ee",
+	"#f5deb3",
+	"#ff1493"
+	];
 
-function change(){
-id = parseInt(Math.random()*(6));
-//console.warn(id);
-document.bgColor=arrColor[id];
+	var id = 0;
+	
+	id = parseInt(Math.random()*(6));
+	//console.warn(id);
+	document.bgColor=arrColor[id];
 }
 
-function startclick(){
-    //alert('game  start ');
-   	change();
-    
-    number=0;
+
+///init
+function init_each(){
+	bgRandom();
+	//bgcolor random
+	
+	score=0;
     timer_remain = TIMER_TOTAL;
-    state = 1;
+    game_state = 1;
+    
     document.getElementById("myscore").style.fontSize="12px";
     document.getElementById("myscore").innerHTML="";
     document.getElementById("stage").style.visibility='visible';
-	canvas = document.getElementById("mycanvas");
-    context = canvas.getContext("2d");
-  
-  	var w=window.innerWidth;
-	var h=window.innerHeight;
-	if (w>h)w = h;
-	
-	canvas = document.getElementById("mycanvas");
+   	var width=window.innerWidth;
+   	var height=window.innerHeight;
+	stagesize=width;
+	if (width>height)stagesize = height;
+//	console.warn("size"+stagesize);
+ 	document.getElementById("stage").style.width =stagesize*0.95 +'px';
+ 	document.getElementById("stage").style.height =stagesize*0.95 +'px';
+ 	document.getElementById("stage").style.border='1px solid #000';
+ 	
+ 	stageleft=document.getElementById("stage").getBoundingClientRect().left;
+ 	stagetop=document.getElementById("stage").getBoundingClientRect().top;
 
-    canvas.width=w*0.95;
-    canvas.height=w*0.95;
-      
-    width = canvas.width;
-    height = canvas.height;
-    //alert(height);
-    //init  ball init position .
-    ballX = parseInt(Math.random()*(width-50));
-    ballY = parseInt(Math.random()*(height-50));
-    
-    addX = -5;
-    addY = -5;
-    
-    jump_2();
-    
-    intervalId = setInterval("jump_2()",TIMER_INTERVAL);
-    document.getElementById("start_btn").disabled = "disabled";
-	document.getElementById("stop_btn").disabled = "";
-    
+//	console.warn("left:"+stageleft +"top:"+  stagetop);
+
+ 	
 }
 
-function stopclick(){
-	context.clearRect(0,0,width,height);
-	context.save();
+///start button
+function startclick(){
+	init_each();
+	
+	document.getElementById("start_btn").disabled = "disabled";
+	document.getElementById("stop_btn").disabled = "";
+	
+    //first time
+    jump();
+    
+    intervalId = setInterval("jump()",TIMER_INTERVAL);
+}
 
+//stop button
+function stopclick(){
+	
+	//timer clear
 	clearInterval(intervalId);
+	game_state=0;
+	
+	// button init
 	document.getElementById("start_btn").disabled = "";
 	document.getElementById("stop_btn").disabled = "disabled";
 
-
-
+	//stage hidden for score
 	document.getElementById("stage").style.visibility='hidden';
-	canvas.width=10;
-	canvas.height=10;
-	
+
 	document.getElementById("myscore").style.fontSize="45px";
 	document.getElementById("myscore").style.color="#4d4d4d";
-	document.getElementById("myscore").innerHTML="本次成绩:" + number;
+	document.getElementById("myscore").innerHTML="本次成绩:" + score;
 
 	// Check browser support
 	if (typeof(Storage) != "undefined") {
-		if(localStorage.getItem("highscore") < number)
+		if(localStorage.getItem("highscore") < score)
 		{
 			// Store
-			localStorage.setItem("highscore", number);
+			localStorage.setItem("highscore", score);
 		}
 		// Retrieve
 		document.getElementById("myscore").innerHTML += "<br>最好成绩:" + localStorage.getItem("highscore");
-	} 
-	state=0;
+	}
+	
+
 }
 
+////window starts
+function windowLoad(){
+        
+    document.getElementById("myMonkey").onclick = catch_monkey;
+   	document.getElementById("stop_btn").disabled = "";
+   	document.getElementById("score").style.color="blue";
+   	
+   	init_each();
+}
 
 </script>
+	
+	
+<style type="text/css">
+div#header {color: blue; margin-left: 10px}
+//div#stage {float:left;}
+div#footer {background-color:#99bbbb;clear:both;text-align:center;}
+</style>
 </head>
   <body onload="windowLoad();" bgcolor="#f06060">
-      <h3 id ="t" style="color: blue; margin-left: 10px">只想不做，不如抓神猿！</h1>
-      <a style="margin-left: 10px" >剩余时间:</a>
+      <div id="header"><h3>只想不做，不如抓神猿！</h1></div>
+      <a>剩余时间:</a>
       <a id="time">00:30</a>
-      <a>，您抓住了</a>
-      <a id="num">0</a>
+      <a>您竟然抓了</a>
+      <a id="score">0</a>
       <a>只猴子！</a>
       <table cellpadding="1">
       <tr>
@@ -244,11 +200,10 @@ function stopclick(){
       </table>
       <p id="myscore"></p>
       <div id="stage">
-          <canvas id="mycanvas"> broswer is not support the game!</canvas>
+          <img id="myMonkey" src="http://i.oslook.com/hero/monkey.jpg" width="50" height="50" >
       </div>
 
- 
- <script>
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
