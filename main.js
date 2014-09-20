@@ -12,20 +12,37 @@ var TIMER_INTERVAL = 1000;
 var timer_remain = TIMER_TOTAL;
 
 var score =0;
-var context ;
 var stagesize;
 var stageleft=0;
 var stagetop=0;
 
 function catch_monkey(ev){
-	var x = ev.pageX;
-	var y = ev.pageY;
-
 	if(game_state ==1){
 	score++;
 	document.getElementById("score").innerHTML=score;
 	}
 }
+
+function touchE(ev){
+    var x = ev.pageX;
+    var y = ev.pageY;
+    // get position relative to canvas .
+    
+    var relativeX = x - document.getElementById("myMonkey").offsetLeft;
+    var relativeY = y - document.getElementById("myMonkey").offsetTop;
+    
+    //judge  whether  clicked  the ball
+    if(-5<(relativeX - monkeyX)&&(relativeX - monkeyX)<=60){
+         if(-5<(relativeY - monkeyY)&&(relativeY - monkeyY)<=60){
+         	 
+			if(game_state ==1){
+			score++;
+			document.getElementById("score").innerHTML=score;
+			}
+        }
+    }
+}
+
 
 function move(){
 	//draw monkey .
@@ -160,7 +177,8 @@ function stopclick(){
 ////window starts
 function windowLoad(){
         
-	document.getElementById("myMonkey").onclick = catch_monkey;
+//	document.getElementById("myMonkey").onclick = catch_monkey;
+	document.getElementById("myMonkey").ontouchstart = touchE;	
 	document.getElementById("stop_btn").disabled = "";
 	document.getElementById("score").style.color="blue";
 
