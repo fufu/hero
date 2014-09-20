@@ -27,10 +27,7 @@ function catch_monkey(ev){
 	}
 }
 
-
-//random move
-function jump(){
-   
+function move(){
 	//draw monkey .
 	monkeyX = parseInt(Math.random()*(stagesize-60));
 	monkeyY = parseInt(Math.random()*(stagesize-60));
@@ -38,7 +35,15 @@ function jump(){
 	document.getElementById("myMonkey").style.position="absolute";
 	document.getElementById("myMonkey").style.left=stageleft + monkeyX + 'px';
 	document.getElementById("myMonkey").style.top=stagetop + monkeyY + 'px';
+	
+}
 
+//random move
+function jump(){
+  	
+  	//random move
+  	move();
+  	
 	//time update
 	timer_remain -= TIMER_INTERVAL;
 	document.getElementById("time").style.color="blue";
@@ -95,7 +100,8 @@ function init_each(){
 
 	stageleft=document.getElementById("stage").getBoundingClientRect().left;
 	stagetop=document.getElementById("stage").getBoundingClientRect().top;
-
+	
+	move();
 	//	console.warn("left:"+stageleft +"top:"+  stagetop);
 
 }
