@@ -150,7 +150,7 @@ function stopclick(){
 		// Retrieve
 		document.getElementById("myscore").innerHTML += "<br>最好成绩:" + localStorage.getItem("highscore");
 	}
-	
+	document.getElementById("myscore").innerHTML += "<br><a style='font-size: 12px;'>使用浏览器："+navigator.appName +"</a>";
 }
 
 ////window starts
