@@ -176,7 +176,7 @@ function windowLoad(){
 ////weixin sharing
 var imgUrl = "http://i.oslook.com/hero/monkey.jpg";
 var lineLink = "http://i.oslook.com/hero";
-var descContent = '抓神猿-根本停不下来，玩过之后我整个人都精神了！';
+var descContent = '我30秒抓了'+m_score+'只贱贱的神猿，击败99%的人，你能超过我吗？';
 var shareTitle = '无聊的时候想不想打猴子玩？ via oslook.com';
 var appid = '';
  
@@ -191,6 +191,9 @@ function contextShare(){
 	}
 	else if(m_score < 10){
 	    descContent = '我抓的神猿太少，谁能帮个忙？';
+	}else
+	{
+		descContent = '神猿，神猿，大伙快来抓吧！';
 	}
 }
 
