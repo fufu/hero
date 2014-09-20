@@ -8,7 +8,7 @@ var monkeyX,monkeyY;
 var intervalId;
 var game_state = 0;
 var TIMER_TOTAL = 30000;
-var TIMER_INTERVAL = 1000;
+var TIMER_INTERVAL = 100000;
 var timer_remain = TIMER_TOTAL;
 
 var score =0;
