@@ -22,15 +22,15 @@ function catch_monkey(ev){
 	var y = ev.pageY;
 
 	if(game_state ==1){
-	    score++;
-		document.getElementById("score").innerHTML=score;
+	score++;
+	document.getElementById("score").innerHTML=score;
 	}
 }
 
 function move(){
 	//draw monkey .
-	monkeyX = parseInt(Math.random()*(stagesize-60));
-	monkeyY = parseInt(Math.random()*(stagesize-60));
+	monkeyX = parseInt(Math.random()*(stagesize-80));
+	monkeyY = parseInt(Math.random()*(stagesize-80));
 	//move
 	document.getElementById("myMonkey").style.position="absolute";
 	document.getElementById("myMonkey").style.left=stageleft + monkeyX + 'px';
