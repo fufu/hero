@@ -100,7 +100,6 @@ function init_each(){
 	score=0;
 	document.getElementById("score").innerHTML=score;
 	timer_remain = TIMER_TOTAL;
-	game_state = 1;
 
 	document.getElementById("myscore").style.width ='1px';
 	document.getElementById("myscore").style.height ='1px';
@@ -127,6 +126,8 @@ function init_each(){
 ///start button
 function startclick(){
 	init_each();
+        //game start already 
+	game_state = 1;
 
 	document.getElementById("start_btn").disabled = "disabled";
 	document.getElementById("stop_btn").disabled = "";
@@ -142,6 +143,7 @@ function stopclick(){
 	
 	//timer clear
 	clearInterval(intervalId);
+        //game over
 	game_state=0;
 	
 	// button init
