@@ -152,6 +152,9 @@ function stopclick(){
 		document.getElementById("myscore").innerHTML += "<br>最好成绩:" + localStorage.getItem("highscore");
 	}
 	document.getElementById("myscore").innerHTML += "<br><a style='font-size: 12px;'>使用浏览器："+navigator.appName +"</a>";
+	
+	contextShare(localStorage.getItem("highscore"));
+
 }
 
 ////window starts
@@ -173,10 +176,23 @@ function windowLoad(){
 ////weixin sharing
 var imgUrl = "http://i.oslook.com/hero/monkey.jpg";
 var lineLink = "http://i.oslook.com/hero";
-var descContent = '我30秒抓了'+ localStorage.getItem("highscore") +'只贱贱的猴子，哈哈，就看你啦...';
+var descContent = '';
 var shareTitle = '无聊的时候想不想打猴子玩？ via oslook.com';
 var appid = '';
  
+funtion contextShare(score){
+	
+	if(score > 40){
+	    descContent = "抓神猿-根本停不下来，玩过之后我整个人都精神了！"
+	}
+	else if(score > 30){
+	    descContent = "我30秒抓了"+localStorage.getItem("highscore")+"只贱贱的神猿，击败99%的人，你能超过我吗？"
+	}
+	else if(score < 10){
+	    descContent = "我抓的神猿太少，谁能帮个忙？"
+	}
+}
+
 function shareFriend() {
     WeixinJSBridge.invoke('sendAppMessage',{
         "appid": appid,
@@ -214,6 +230,7 @@ function shareWeibo() {
 // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
 document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() 
 {
+	
     // 发送给好友
     WeixinJSBridge.on('menu:share:appmessage', function(argv){
         shareFriend();
