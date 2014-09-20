@@ -176,11 +176,11 @@ function windowLoad(){
 ////weixin sharing
 var imgUrl = "http://i.oslook.com/hero/monkey.jpg";
 var lineLink = "http://i.oslook.com/hero";
-var descContent = '';
+var descContent = '抓神猿-根本停不下来，玩过之后我整个人都精神了！';
 var shareTitle = '无聊的时候想不想打猴子玩？ via oslook.com';
 var appid = '';
  
-funtion contextShare(score){
+function contextShare(score){
 	
 	if(score > 40){
 	    descContent = "抓神猿-根本停不下来，玩过之后我整个人都精神了！"
