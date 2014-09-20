@@ -179,6 +179,10 @@ function windowLoad(){
         
 //	document.getElementById("myMonkey").onclick = catch_monkey;
 	document.getElementById("myMonkey").ontouchstart = touchE;	
+	document.getElementById("myMonkey").ontouchmove =  function(e){
+	//可为touchstart、touchmove事件加上preventDefault从而阻止触摸时浏览器的缩放、滚动条滚动等
+	e.preventDefault();
+	};
 	document.getElementById("stop_btn").disabled = "";
 	document.getElementById("score").style.color="blue";
 
