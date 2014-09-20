@@ -176,7 +176,7 @@ function windowLoad(){
 ////weixin sharing
 var imgUrl = "http://i.oslook.com/hero/monkey.jpg";
 var lineLink = "http://i.oslook.com/hero";
-var descContent = '我30秒抓了'+localStorage.getItem("highscore")+'只贱贱的神猿，击败99%的人，你能超过我吗？';
+var descContent = "我30秒抓了"+localStorage.getItem("highscore")+"只贱贱的神猿，击败99%的人，你能超过我吗？";
 var shareTitle = '无聊的时候想不想打猴子玩？ via oslook.com';
 var appid = '';
  
@@ -184,16 +184,16 @@ function contextShare(){
 	var m_score = localStorage.getItem("highscore");
 		
 	if(m_score > 40){
-	    descContent = '抓神猿-根本停不下来，玩过之后我整个人都精神了！';
+	    descContent = "抓神猿-根本停不下来，玩过之后我整个人都精神了！";
 	}
 	else if(m_score > 30){
-	    descContent = '我30秒抓了'+m_score+'只贱贱的神猿，击败99%的人，你能超过我吗？';
+	    descContent = "我30秒抓了"+m_score+"只贱贱的神猿，击败99%的人，你能超过我吗？";
 	}
 	else if(m_score < 10){
-	    descContent = '我抓的神猿太少，谁能帮个忙？';
+	    descContent = "我抓的神猿太少，谁能帮个忙？";
 	}else
 	{
-		descContent = '神猿，神猿，大伙快来抓吧！';
+		descContent = "神猿，神猿，大伙快来抓吧！";
 	}
 }
 
@@ -243,7 +243,6 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady()
     
     // 分享到朋友圈
     WeixinJSBridge.on('menu:share:timeline', function(argv){
-    	contextShare();
         shareTimeline();
     });
     
