@@ -135,7 +135,7 @@ function startclick(){
 	//first time
 	jump();
 
-	intervalId = setInterval("jump()",TIMER_INTERVAL);
+	// = setInterval("jump()",TIMER_INTERVAL);
 }
 
 //stop button
