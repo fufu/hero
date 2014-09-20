@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <title>比速度，30秒内抓神猿</title>
-<meta name="description" content="monkey game for joke..."> 
+<meta name="description" content="比分数..."> 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://i.oslook.com/hero" />
 <meta property="og:title" content="无聊的时候想不想打猴子玩？ via oslook.com" />
@@ -67,7 +67,6 @@ function windowLoad(){
         
     document.getElementById("mycanvas").onclick = catch_ball;
    	document.getElementById("stop_btn").disabled = "";
-  
 }
 
 function jump(){
@@ -130,7 +129,7 @@ function jump_2(){
     ballX = parseInt(Math.random()*(width-50));
     ballY = parseInt(Math.random()*(height-50));
 	var img=new Image();
-	img.src="./monkey.jpg";
+	img.src="http://i.oslook.com/hero/monkey.jpg";
 	img.onload=function(){
 		context.drawImage(img,ballX,ballY);
 	};
