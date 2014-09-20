@@ -157,7 +157,6 @@ function stopclick(){
 function windowLoad(){
         
 	document.getElementById("myMonkey").onclick = catch_monkey;
-	document.getElementById("myMonkey").onmouseup = catch_monkey;	
 	document.getElementById("stop_btn").disabled = "";
 	document.getElementById("score").style.color="blue";
 
