@@ -81,7 +81,7 @@ function init_each(){
 
 	document.getElementById("myscore").style.width ='1px';
 	document.getElementById("myscore").style.height ='1px';
-	document.getElementById("myscore").style.fontSize="12px";
+	document.getElementById("myscore").style.fontSize="1px";
 	document.getElementById("myscore").innerHTML="";
 	document.getElementById("stage").style.visibility='visible';
 	var width=window.innerWidth;
