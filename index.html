@@ -42,7 +42,6 @@ var arrColor = [
 var id = 0;
 
 function catch_ball(ev){
-    //alert('catch');
     var x = ev.pageX;
     var y = ev.pageY;
     // get position relative to canvas .
@@ -51,11 +50,12 @@ function catch_ball(ev){
     var relativeY = y - document.getElementById("mycanvas").offsetTop;
     
     //judge  whether  clicked  the ball
-    if(-5<(relativeX - ballX)&&(relativeX - ballX)<=60){
-         if(-5<(relativeY - ballY)&&(relativeY - ballY)<=60){
+    if(0<(relativeX - ballX)&&(relativeX - ballX)<=60){
+         if(0<(relativeY - ballY)&&(relativeY - ballY)<=60){
+         //console.warn(relativeX)
          	if(state ==1){
             number++;
-       		document.getElementById("num").style.color="blue";
+       	//	document.getElementById("num").style.color="blue";
        		document.getElementById("num").innerHTML=number;
        		}
         }
@@ -67,6 +67,7 @@ function windowLoad(){
         
     document.getElementById("mycanvas").onclick = catch_ball;
    	document.getElementById("stop_btn").disabled = "";
+   	document.getElementById("num").style.color="blue";
 }
 
 function jump(){
@@ -138,6 +139,7 @@ function jump_2(){
 	document.getElementById("time").style.color="blue";
 	document.getElementById("time").innerHTML="00:" + timer_remain/1000;
 
+	
 	if(timer_remain <= 0)
 	{
 	///	alert('时间到！恭喜你竟然抓到了n只神猿！');
@@ -201,7 +203,7 @@ function stopclick(){
 	document.getElementById("start_btn").disabled = "";
 	document.getElementById("stop_btn").disabled = "disabled";
 
-	document.getElementById("num").style.color="blue";
+
 
 	document.getElementById("stage").style.visibility='hidden';
 	canvas.width=10;
@@ -221,13 +223,14 @@ function stopclick(){
 		// Retrieve
 		document.getElementById("myscore").innerHTML += "<br>最好成绩:" + localStorage.getItem("highscore");
 	} 
+	state=0;
 }
 
 
 </script>
 </head>
   <body onload="windowLoad();" bgcolor="#f06060">
-      <h3 id ="t" style="color: blue; margin-left: 10px">只想不做，不如抓神猿！<br>30秒能抓几个？</h1>
+      <h3 id ="t" style="color: blue; margin-left: 10px">只想不做，不如抓神猿！</h1>
       <a style="margin-left: 10px" >剩余时间:</a>
       <a id="time">00:30</a>
       <a>，您抓住了</a>
@@ -235,8 +238,8 @@ function stopclick(){
       <a>只猴子！</a>
       <table cellpadding="1">
       <tr>
-      <td><input type="button" value="开始" id="start_btn" onclick="startclick();" style="background-color: #8F431B; color:#FFCC66;"/></td>
-      <td><input type="button" value="神猿太快，不玩了-_-!" id="stop_btn" onclick="stopclick();" style="background-color: #8F431B; color:#FFCC66;"/></td> 
+      <td><input type="button" value="开始" id="start_btn" onclick="startclick();" style="background-color: #8F431B;"/></td>
+      <td><input type="button" value="神猿太快，不玩了-_-!" id="stop_btn" onclick="stopclick();" style="background-color: #8F431B;"/></td> 
       </tr>
       </table>
       <p id="myscore"></p>
