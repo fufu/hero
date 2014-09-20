@@ -81,6 +81,7 @@ function init_each(){
 	//bgcolor random
 
 	score=0;
+	document.getElementById("score").innerHTML=score;
 	timer_remain = TIMER_TOTAL;
 	game_state = 1;
 
